@@ -1,6 +1,10 @@
-如果多个web项目都要用到mybatis框架，并且都要用到mybatis generator反向工程，相互之间进行代码以及配置文件的拷贝也是一件很麻烦的事，本项目就是用户解决此问题。只需要依赖指定的jar包，添加必要的配置，即可实现**默认**的mybatis generator反向工程。
+如果多个web项目都要用到mybatis框架，并且都要用到mybatis generator反向工程，相互之间进行代码以及配置文件的拷贝也是一件很麻烦的事，本项目就是用于解决此问题。只需要依赖指定的jar包，添加必要的配置，即可实现**默认**的mybatis generator反向工程。
 
-**注意**：当前版本1.0.0只针对mysql数据进行开发。
+**注意**：
+
+1. 当前版本1.0.0只针对mysql数据进行开发。
+2. 直接添加Maven依赖是不能被下载的，因为在Maven中央仓库中根本就不存在，所以需要使用，请自行下载项目打包安装。
+
 ## 添加maven依赖
 ```
 <dependency>
@@ -21,7 +25,7 @@
 MYBATIS_GENERATOR_JDBC_CONNECTION_URL=jdbc:mysql://localhost:3306/finance?useUnicode\=true&useSSL\=false&serverTimezone\=UTC
 MYBATIS_GENERATOR_JDBC_DRIVER_CLASS=com.mysql.cj.jdbc.Driver
 MYBATIS_GENERATOR_JDBC_USER_ID=root
-MYBATIS_GENERATOR_JDBC_PASSWORD=597646251
+MYBATIS_GENERATOR_JDBC_PASSWORD=xxxxxx
 MYBATIS_GENERATOR_PROJECT=src/main/java
 MYBATIS_GENERATOR_JAVA_MODEL_PROJECT=src/main/java
 MYBATIS_GENERATOR_JAVA_MODEL_PACKAGE=com.mybatis.model
@@ -35,7 +39,7 @@ MYBATIS_GENERATOR_JAVA_CLIENT_PACKAGE=com.mybatis.mapper
 -Dmybatis.generator.jdbc.connectionURL=jdbc:mysql://localhost:3306/finance?useUnicode=true&useSSL=false&serverTimezone=UTC
 -Dmybatis.generator.jdbc.driverClass=com.mysql.cj.jdbc.Driver
 -Dmybatis.generator.jdbc.userId=root
--Dmybatis.generator.jdbc.password=597646251
+-Dmybatis.generator.jdbc.password=xxxxxx
 -Dmybatis.generator.project=src/main/java
 -Dmybatis.generator.java.model.project=src/main/java
 -Dmybatis.generator.java.model.package=com.mybatis.model
@@ -51,7 +55,7 @@ MYBATIS_GENERATOR_JAVA_CLIENT_PACKAGE=com.mybatis.mapper
 mybatis.generator.jdbc.connectionURL=jdbc:mysql://localhost:3306/finance?useUnicode=true&useSSL=false&serverTimezone=UTC
 mybatis.generator.jdbc.driverClass=com.mysql.cj.jdbc.Driver
 mybatis.generator.jdbc.userId=root
-mybatis.generator.jdbc.password=597646251
+mybatis.generator.jdbc.password=xxxxxx
 mybatis.generator.project=src/main/java
 mybatis.generator.java.model.project=src/main/java
 mybatis.generator.java.model.package=com.mybatis.model
@@ -61,7 +65,7 @@ mybatis.generator.java.client.project=src/main/java
 mybatis.generator.java.client.package=com.mybatis.mapper
 mybatis.generator.table.names=expenditure,master_type
 ```
-配置文件必须命名为`mybatis-generator.properties`，比起必须直接放在classpath根目录下，否则找不到配置文件。例如`resources`资源目录。
+配置文件必须命名为`mybatis-generator.properties`，必须放在classpath根目录下，否则找不到配置文件。例如`resources`资源目录。
 ## 属性详解
 ```
 mybatis.generator.jdbc.connectionURL
@@ -99,6 +103,21 @@ sql映射xml文件生成路径。路径等同于`mybatis.generator.java.model.pr
 mybatis.generator.sql.map.package
 ```
 sql映射xml文件生成包路径。路径等同于`mybatis.generator.java.model.package`。
+
+在idea开发工具下，sql映射xml文件放置在包中不会被编译到target目录下，可以设置maven资源配置解决此问题：
+```
+<build>
+    <resources>
+        <resource>
+            <directory>src/main/java</directory>
+            <includes>
+                <include>com/githup/sqlMapper/*.xml</include>
+            </includes>
+        </resource>
+    </resources>
+</build>
+```
+
 ```
 mybatis.generator.java.client.project
 ```
@@ -114,7 +133,7 @@ mybatis.generator.table.names
 
 ## 优先级
 环境变量配置 < vm配置 < 配置文件
-配置文件的优先级最高，会覆盖vm配置，vm配置会覆盖环境变量配置。
+>配置文件的优先级最高，会覆盖vm配置，vm配置会覆盖环境变量配置。
 
 ## 执行
 执行main方法
