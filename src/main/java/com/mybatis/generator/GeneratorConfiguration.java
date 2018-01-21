@@ -13,6 +13,7 @@ public class GeneratorConfiguration {
         Configuration configuration = new Configuration();
         Context context = new Context(ModelType.FLAT);
         context.setId("Mysql");
+        context.setTargetRuntime("MyBatis3");
         context.addProperty("beginningDelimiter","`");
         context.addProperty("endingDelimiter","`");
         context.addProperty("autoDelimitKeywords","true");
@@ -32,10 +33,11 @@ public class GeneratorConfiguration {
         }
 
         //配置注释生成器
-        CommentGeneratorConfiguration commentGeneratorConfiguration = new CommentGeneratorConfiguration();
-        commentGeneratorConfiguration.addProperty("suppressDate","true");
-        commentGeneratorConfiguration.addProperty("suppressAllComments","true");
-        context.setCommentGeneratorConfiguration(commentGeneratorConfiguration);
+//        CommentGeneratorConfiguration commentGeneratorConfiguration = new CommentGeneratorConfiguration();
+//        //如果您将此值设置为true，则所有代码合并都将被禁用。
+//        commentGeneratorConfiguration.addProperty("suppressAllComments","true");
+//        commentGeneratorConfiguration.addProperty("suppressDate","true");
+//        context.setCommentGeneratorConfiguration(commentGeneratorConfiguration);
 
         //配置数据库连接
         JDBCConnectionConfiguration jdbcConnectionConfiguration = new JDBCConnectionConfiguration();
@@ -44,8 +46,6 @@ public class GeneratorConfiguration {
         jdbcConnectionConfiguration.setPassword(config.getJdbcPassword());
         jdbcConnectionConfiguration.setUserId(config.getJdbcUserId());
         context.setJdbcConnectionConfiguration(jdbcConnectionConfiguration);
-
-
 
         //配置Java类型解析器
         JavaTypeResolverConfiguration javaTypeResolverConfiguration = new JavaTypeResolverConfiguration();
@@ -80,7 +80,6 @@ public class GeneratorConfiguration {
             tableConfiguration.setTableName(tableName);
             context.addTableConfiguration(tableConfiguration);
         }
-
         configuration.addContext(context);
         return configuration;
     }
