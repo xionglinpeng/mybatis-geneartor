@@ -1,7 +1,7 @@
-##版本更新日志
+## 版本更新日志
 1. 1.0.0 初始版本
 2. 1.0.1 BUG修复
-    代码注释配置`commentGeneratorConfiguration.addProperty("suppressAllComments","true");`导致生成的xml反射文件重复，查看官方文档提示`Warning: if you set this value to true, then all code merging will be disabled.`（如果您将此值设置为true，则所有代码合并都将被禁用。），以修复BUG，修复方式：去掉了注释配置。
+    代码注释配置`commentGeneratorConfiguration.addProperty("suppressAllComments","true");`导致生成的xml反射文件重复，查看官方文档提示`Warning: if you set this value to true, then all code merging will be disabled.`（如果您将此值设置为true，则所有代码合并都将被禁用。），已修复BUG，修复方式：去掉了注释配置。
 
 
 如果多个web项目都要用到mybatis框架，并且都要用到mybatis generator反向工程，相互之间进行代码以及配置文件的拷贝也是一件很麻烦的事，本项目就是用于解决此问题。只需要依赖指定的jar包，添加必要的配置，即可实现**默认**的mybatis generator反向工程。
